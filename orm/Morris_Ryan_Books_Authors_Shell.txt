@@ -1,0 +1,172 @@
+(djangoPy3Env)
+Ryan@DESKTOP-AR97D27 MINGW64 ~/cd/Django/orm (master)
+$ django-admin startproject books_authors_proj
+(djangoPy3Env)
+Ryan@DESKTOP-AR97D27 MINGW64 ~/cd/Django/orm (master)
+$ cd books_authors_proj/
+(djangoPy3Env)
+Ryan@DESKTOP-AR97D27 MINGW64 ~/cd/Django/orm/books_authors_proj (master)
+$ python manage.py startapp books_authors_app
+(djangoPy3Env)
+Ryan@DESKTOP-AR97D27 MINGW64 ~/cd/Django/orm/books_authors_proj (master)
+$ python manage.py makemigrations
+Migrations for 'books_authors_app':
+  books_authors_app\migrations\0001_initial.py
+    - Create model Book
+    - Create model Author
+(djangoPy3Env)
+Ryan@DESKTOP-AR97D27 MINGW64 ~/cd/Django/orm/books_authors_proj (master)
+$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, books_authors_app, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying books_authors_app.0001_initial... OK
+  Applying sessions.0001_initial... OK
+(djangoPy3Env)
+Ryan@DESKTOP-AR97D27 MINGW64 ~/cd/Django/orm/books_authors_proj (master)
+$ python manage.py shell
+Python 3.9.5 (tags/v3.9.5:0a7dcbd, May  3 2021, 17:27:52) [MSC v.1928 64 bit (AM
+D64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from books_authors_app.models import *
+>>> Book.objects.create(title='C Sharp',desc='A book about the C# programming la
+nguage.')
+<Book: Book object (1)>
+>>> Book.objects.create(title='Java',desc='A book about the Java programming lan
+guage.')
+<Book: Book object (2)>
+>>> Book.objects.create(title='Python',desc='A book about the Python programming language.')
+<Book: Book object (3)>
+>>> Book.objects.create(title='PHP',desc='A book about the PHP programming language.')
+<Book: Book object (4)>
+>>> Book.objects.create(title='Ruby',desc='A book about the Ruby programming language.')
+<Book: Book object (5)>
+>>> Book.objects.all().values()
+<QuerySet [{'id': 1, 'title': 'C Sharp', 'desc': 'A book about the C# programming language.', 'created_at': datetime.datetime(2021, 7, 31, 19, 9, 48, 589350, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 31, 19, 9, 48, 589350, tzinfo=<UTC>)}, {'id': 2, 'title':
+ 'Java', 'desc': 'A book about the Java programming language.', 'created_at': datetime.datetime(2021, 7, 31, 19, 10, 14, 827813, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 31, 19, 10, 14, 827813, tzinfo=<UTC>)}, {'id': 3, 'title': 'Python', 'desc': 'A book a
+bout the Python programming language.', 'created_at': datetime.datetime(2021, 7, 31, 19, 10, 30, 841532, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 31, 19, 10, 30, 841532, tzinfo=<UTC>)}, {'id': 4, 'title': 'PHP', 'desc': 'A book about the PHP programming la
+nguage.', 'created_at': datetime.datetime(2021, 7, 31, 19, 10, 48, 125797, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 31, 19, 10, 48, 126769, tzinfo=<UTC>)}, {'id': 5, 'title': 'Ruby', 'desc': 'A book about the Ruby programming language.', 'created_at': date
+time.datetime(2021, 7, 31, 19, 11, 6, 99278, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 31, 19, 11, 6, 99278, tzinfo=<UTC>)}]>
+>>> Author.objects.create(first_name='Jane',last_name='Austen')
+<Author: Author object (1)>
+>>> Author.objects.create(first_name='Emily',last_name='Dickinson')
+<Author: Author object (2)>
+>>> Author.objects.create(first_name='Fyodor',last_name='Dostoevsky')
+<Author: Author object (3)>
+>>> Author.objects.create(first_name='William',last_name='Shakespeare')
+<Author: Author object (4)>
+>>> Author.objects.create(first_name='Lao',last_name='Tzu')
+<Author: Author object (5)>
+>>> Author.objects.all().values()
+<QuerySet [{'id': 1, 'first_name': 'Jane', 'last_name': 'Austen', 'created_at': datetime.datetime(2021, 7, 31, 19, 35, 1, 591181, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 31, 19, 35, 1, 591181, tzinfo=<UTC>)}, {'id': 2, 'first_name': 'Emily', 'last_name':
+'Dickinson', 'created_at': datetime.datetime(2021, 7, 31, 19, 35, 24, 792421, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 31, 19, 35, 24, 792421, tzinfo=<UTC>)}, {'id': 3, 'first_name': 'Fyodor', 'last_name': 'Dostoevsky', 'created_at': datetime.datetime(2021
+, 7, 31, 19, 35, 49, 577117, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 31, 19, 35, 49, 577117, tzinfo=<UTC>)}, {'id': 4, 'first_name': 'William', 'last_name': 'Shakespeare', 'created_at': datetime.datetime(2021, 7, 31, 19, 36, 7, 647542, tzinfo=<UTC>), 'upd
+ated_at': datetime.datetime(2021, 7, 31, 19, 36, 7, 647542, tzinfo=<UTC>)}, {'id': 5, 'first_name': 'Lao', 'last_name': 'Tzu', 'created_at': datetime.datetime(2021, 7, 31, 19, 36, 24, 676487, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 31, 19, 36, 24, 676487,
+ tzinfo=<UTC>)}]>
+>>> exit()
+(djangoPy3Env)
+Ryan@DESKTOP-AR97D27 MINGW64 ~/cd/Django/orm/books_authors_proj (master)
+$ python manage.py makemigrations
+Migrations for 'books_authors_app':
+  books_authors_app\migrations\0002_author_notes.py
+    - Add field notes to author
+(djangoPy3Env)
+Ryan@DESKTOP-AR97D27 MINGW64 ~/cd/Django/orm/books_authors_proj (master)
+$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, books_authors_app, contenttypes, sessions
+Running migrations:
+  Applying books_authors_app.0002_author_notes... OK
+(djangoPy3Env)
+Ryan@DESKTOP-AR97D27 MINGW64 ~/cd/Django/orm/books_authors_proj (master)
+$ python manage.py shell
+Python 3.9.5 (tags/v3.9.5:0a7dcbd, May  3 2021, 17:27:52) [MSC v.1928 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from books_authors_app.models import *
+>>> book_to_update = Book.objects.get(title='C Sharp')
+>>> book_to_update.title = 'C#'
+>>> book_to_update.save()
+>>> Book.objects.get(id=1).__dict__
+{'_state': <django.db.models.base.ModelState object at 0x000001F912343700>, 'id': 1, 'title': 'C#', 'desc': 'A book about the C# programming language.', 'created_at': datetime.datetime(2021, 7, 31, 19, 9, 48, 589350, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7
+, 31, 19, 51, 21, 23403, tzinfo=<UTC>)}
+>>> author_to_update = Author.objects.get(id=4)
+>>> author_to_update.first_name = 'Bill'
+>>> author_to_update.save()
+>>> Author.objects.get(id=4).__dict__
+{'_state': <django.db.models.base.ModelState object at 0x000001F912343BB0>, 'id': 4, 'first_name': 'Bill', 'last_name': 'Shakespeare', 'notes': None, 'created_at': datetime.datetime(2021, 7, 31, 19, 36, 7, 647542, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 3
+1, 19, 58, 38, 576454, tzinfo=<UTC>)}
+>>> Author.objects.get(id=1).books.add(Book.objects.get(id=1))
+>>> Author.objects.get(id=1).books.add(Book.objects.get(id=2))
+>>> Author.objects.get(id=2).books.add(Book.objects.get(id=1))
+>>> Author.objects.get(id=2).books.add(Book.objects.get(id=2))
+>>> Author.objects.get(id=2).books.add(Book.objects.get(id=3))
+>>> Author.objects.get(id=3).books.add(Book.objects.get(id=1))
+>>> Author.objects.get(id=3).books.add(Book.objects.get(id=2))
+>>> Author.objects.get(id=3).books.add(Book.objects.get(id=3))
+>>> Author.objects.get(id=3).books.add(Book.objects.get(id=4))
+>>> for each_book in Book.objects.all():
+...     Author.objects.get(id=4).books.add(each_book)
+...
+>>> Author.objects.get(id=1).books.all()
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>]>
+>>> Author.objects.get(id=2).books.all()
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>]>
+>>> Author.objects.get(id=3).books.all()
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>, <Book: Book object (4)>]>
+>>> Author.objects.get(id=4).books.all()
+<QuerySet [<Book: Book object (1)>, <Book: Book object (2)>, <Book: Book object (3)>, <Book: Book object (4)>, <Book: Book object (5)>]>
+>>> for each_author in Book.objects.get(id=3).authors.all():
+...     print(each_author.first_name, each_author.last_name)
+...
+Emily Dickinson
+Fyodor Dostoevsky
+Bill Shakespeare
+>>> author_to_remove = Book.objects.get(id=3).authors.first()
+>>> Book.objects.get(id=3).authors.remove(author_to_remove)
+>>> for each_author in Book.objects.get(id=3).authors.all():
+...     print(each_author.first_name, each_author.last_name)
+...
+Fyodor Dostoevsky
+Bill Shakespeare
+>>> Book.objects.get(id=2).authors.add(Author.objects.get(id=5))
+>>> for each_author in Book.objects.get(id=2).authors.all():
+...     print(each_author.first_name, each_author.last_name)
+...
+Jane Austen
+Emily Dickinson
+Fyodor Dostoevsky
+Bill Shakespeare
+Lao Tzu
+>>>
+>>> all_by_3 = Author.objects.get(id=3).books.all()
+>>> for b in all_by_3:
+...     print(b.title)
+...
+C#
+Java
+Python
+PHP
+>>> authors_of_5 = Book.objects.get(id=5).authors.all()
+>>> for a in authors_of_5:
+...     print(a.first_name, a.last_name)
+...
+Bill Shakespeare
+>>>

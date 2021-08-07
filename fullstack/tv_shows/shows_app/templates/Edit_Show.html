@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>Edit TV Show {{ tv_show.id }}</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="go_back">
+            <p><a href="/shows/">Go Back</a></p>
+        </div>
+        <div class="header">
+            <h1>Edit Show {{ tv_show.id }}</h1>
+        </div>
+        <div class="main_content">
+            <form action="/shows/{{ tv_show.id }}/update/" method="POST">
+                {% csrf_token %}
+                <table class="show_form">
+                    <tr>
+                        <td colspan="2" class="form_cell">
+                            <p><label for="title">Title</label></p>
+                            <input type="text" name="title" id="title" value="{{ tv_show.title }}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form_cell">
+                            <p><label for="network">Network</label></p>
+                            <input type="text" name="network" id="network" value="{{ tv_show.network }}">
+                        </td>
+                        <td class="form_cell">
+                            <p><label for="release_date">Release Date</label></p>
+                            <input type="date" name="release_date" id="release_date" value="{{ tv_show.release_date.isoformat }}">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="form_cell">
+                            <p><label for="description">Description</label></p>
+                            <textarea name="description" id="description">{{ tv_show.description }}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="form_cell">
+                            <button type="submit">Update</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

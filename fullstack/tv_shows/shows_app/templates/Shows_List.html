@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>TV Shows</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <h1>All Shows</h1>
+        </div>
+        <div class="main_content">
+            <table class="dyn_list" id="show_list">
+                <thead>
+                    <tr class="dyn_list_head">
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Network</th>
+                        <th>Release Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tv_show in all_shows %}
+                    <tr class="dyn_list_{% cycle 'row1' 'row2' %}">
+                        <td>{{ tv_show.id }}</td>
+                        <td>{{ tv_show.title }}</td>
+                        <td>{{ tv_show.network }}</td>
+                        <td>{{ tv_show.get_release_date }}</td>
+                        <td><a href="/shows/{{ tv_show.id }}/">Show</a> | <a href="/shows/{{ tv_show.id }}/edit/">Edit</a> | <a href="/shows/{{ tv_show.id }}/destroy/">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="options">
+            <a href="/shows/new/">Add a New Show</a>
+        </div>
+    </div>
+</body>
+</html>

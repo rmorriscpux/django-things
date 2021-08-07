@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books and Authors</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="wrapper_row" id="author_wrapper">
+        <div class="add_form" id="add_author_form">
+            <h2>Add an Author</h2>
+            <form action="/authors/add" method="POST">
+                {% csrf_token %}
+                <table class="add_form_table" id="add_author_table">
+                    <tr>
+                        <td class="add_form_category"><label for="first_name">First Name:</label></td>
+                        <td class="add_form_input"><input type="text" name="first_name" id="first_name"></td>
+                    </tr>
+                    <tr>
+                        <td class="add_form_category"><label for="last_name">Last Name:</label></td>
+                        <td class="add_form_input"><input type="text" name="last_name" id="last_name"></td>
+                    </tr>
+                    <tr>
+                        <td class="add_form_category"><label for="notes">Notes</label></td>
+                        <td class="add_form_input"><textarea name="notes" id="notes"></textarea></td>
+                    </tr>
+                </table>
+                <button type="submit">Add</button>
+            </form>
+        </div>
+        <div class="list_display" id="authors_list_display">
+            <table class="list" id="authors_list">
+                <thead>
+                    <tr class="list_head">
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for a in all_authors %}
+                    <tr class="{% cycle 'list_row_1' 'list_row_2' %}">
+                        <td>{{ a.id }}</td>
+                        <td>{{ a.first_name }} {{ a.last_name }}</td>
+                        <td><a href="/authors/{{ a.id }}/">View</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

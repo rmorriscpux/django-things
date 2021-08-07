@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojo Survey</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Dojo Survey</h1>
+    <div id="survey_form" class="simple_block">
+        <form action="/set_data" method="post">
+            {% csrf_token %}
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name">
+            <label for="location">Dojo Location:</label>
+            <select id="location" name="location">
+                <option value="San Diego">San Diego</option>
+                <option value="Las Vegas">Las Vegas</option>
+                <option value="Chicago">Chicago</option>
+                <option value="New York City">New York City</option>
+            </select>
+            <label for="language">Favorite Language:</label>
+            <input type="text" id="language" name="language">
+            <label for="comments">Comments (optional):</label>
+            <textarea id="comments" name="comments" rows=6 cols=50></textarea>
+            <p>Favorite Food</p>
+            <label for="pizza">Pizza</label>
+            <input type="radio" id="pizza" name="fave_food" value="Pizza">
+            <label for="burger">Hamburger</label>
+            <input type="radio" id="burger" name="fave_food" value="Hamburger">
+            <label for="fries">French Fries</label>
+            <input type="radio" id="fries" name="fave_food" value="French Fries">
+            <p>Today I Wore</p>
+            <label for="shirt">Shirt</label>
+            <input type="checkbox" id="shirt" name="clothing" value="Shirt">
+            <label for="underwear">Underwear</label>
+            <input type="checkbox" id="underwear" name="clothing" value="Underwear">
+            <label for="socks">Socks</label>
+            <input type="checkbox" id="socks" name="clothing" value="Socks">
+            <label for="pants">Pants</label>
+            <input type="checkbox" id="pants" name="clothing" value="Pants">
+            <button type="submit" id="form_submit" name="form_submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

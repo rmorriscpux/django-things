@@ -1,0 +1,28 @@
+body{
+    text-align: center;
+}
+#user_table{
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 0px;
+    margin: auto;
+}
+#user_table th, #user_table td{
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    margin: 0px;
+    padding: 5px;
+}
+#user_table tr.header{
+    background-color: #cacaca;
+}
+#user_table tr.row1{
+    background-color: #e8e8e8;
+}
+#user_table tr.row2{
+    background-color: #d8d8d8;
+}
+#new_user_table{
+    margin: auto;
+    text-align: right;
+}

@@ -1,0 +1,40 @@
+div.wrapper_row{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+div.desc_row{
+    display: flex;
+    align-items: flex-start;
+}
+div.desc_display{
+    padding-left: 5px;
+    width: 400px;
+}
+div.add_form{
+    text-align: center;
+    padding: 0px 50px;
+}
+td.add_form_category{
+    text-align: right;
+}
+td.add_form_input{
+    text-align: left;
+}
+table.list{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+table.list td, th{
+    padding: 5px;
+    border-right: 1px solid black;
+}
+tr.list_head{
+    background-color: #c8c8c8;
+}
+tr.list_row_1{
+    background-color: #e8e8e8;
+}
+tr.list_row_2{
+    background-color: #d4d4d4;
+}

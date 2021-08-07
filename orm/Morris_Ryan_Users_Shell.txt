@@ -1,0 +1,105 @@
+(djangoPy3Env)
+Ryan@DESKTOP-AR97D27 MINGW64 ~/cd/Django/orm (master)
+$ django-admin startproject single_model_orm
+(djangoPy3Env)
+Ryan@DESKTOP-AR97D27 MINGW64 ~/cd/Django/orm (master)
+$ cd single_model_orm/
+(djangoPy3Env)
+Ryan@DESKTOP-AR97D27 MINGW64 ~/cd/Django/orm/single_model_orm (master)
+$ python manage.py startapp users_app
+(djangoPy3Env)
+Ryan@DESKTOP-AR97D27 MINGW64 ~/cd/Django/orm/single_model_orm (master)
+$ python manage.py makemigrations
+No changes detected
+(djangoPy3Env)
+Ryan@DESKTOP-AR97D27 MINGW64 ~/cd/Django/orm/single_model_orm (master)
+$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying sessions.0001_initial... OK
+(djangoPy3Env)
+Ryan@DESKTOP-AR97D27 MINGW64 ~/cd/Django/orm/single_model_orm (master)
+$ python manage.py shell
+Python 3.9.5 (tags/v3.9.5:0a7dcbd, May  3 2021, 17:27:52) [MSC v.1928 64 bit (AM
+D64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from users_app.models import *
+>>> User.objects.create(first_name='John', last_name='Smith', email_address='joh
+n_s@thisemail.com', age=21)
+<User: User object (1)>
+>>> User.objects.create(first_name='Jimmy', last_name='Jones', email_address='ji
+mmy_j@thisemail.com', age=32)
+<User: User object (2)>
+>>> User.objects.create(first_name='Jeff', last_name='Kent', email_address='jeff
+_k@thisemail.com', age=43)
+<User: User object (3)>
+>>> all_users = User.objects.all()
+>>> print(all_users)
+<QuerySet [<User: User object (1)>, <User: User object (2)>, <User: User object
+(3)>]>
+>>> for u in all_users:
+...     print(f"{u.first_name} {u.last_name}")
+...
+John Smith
+Jimmy Jones
+Jeff Kent
+>>> last_user = User.objects.last()
+>>> print(last_user)
+User object (3)
+>>> print(last_user.id, last_user.first_name, last_user.last_name, last_user.ema
+il_address, last_user.age, last_user.created_at, last_user.updated_at)
+3 Jeff Kent jeff_k@thisemail.com 43 2021-07-29 12:21:27.841807+00:00 2021-07-29
+12:21:27.841807+00:00
+>>> first_user = User.objects.first()
+>>> print(first_user)
+User object (1)
+>>> print(first_user.id, first_user.first_name, first_user.last_name, first_user
+.email_address, first_user.age, first_user.created_at, first_user.updated_at)
+1 John Smith john_s@thisemail.com 21 2021-07-29 12:20:45.522281+00:00 2021-07-29
+ 12:20:45.522281+00:00
+>>> user_update = User.objects.get(id=3)
+>>> user_update.last_name = 'Pancakes'
+>>> user_update.save()
+>>> print(User.objects.get(id=3).last_name)
+Pancakes
+>>> user_delete = User.objects.get(id=2)
+>>> user_delete.delete()
+(1, {'users_app.User': 1})
+>>> print(User.objects.all())
+<QuerySet [<User: User object (1)>, <User: User object (3)>]>
+>>> order_asc = User.objects.all().order_by('first_name')
+>>> print(order_asc.values())
+<QuerySet [{'id': 3, 'first_name': 'Jeff', 'last_name': 'Pancakes', 'email_addre
+ss': 'jeff_k@thisemail.com', 'age': 43, 'created_at': datetime.datetime(2021, 7,
+ 29, 12, 21, 27, 841807, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7,
+ 29, 16, 37, 21, 156710, tzinfo=<UTC>)}, {'id': 1, 'first_name': 'John', 'last_n
+ame': 'Smith', 'email_address': 'john_s@thisemail.com', 'age': 21, 'created_at':
+ datetime.datetime(2021, 7, 29, 12, 20, 45, 522281, tzinfo=<UTC>), 'updated_at':
+ datetime.datetime(2021, 7, 29, 12, 20, 45, 522281, tzinfo=<UTC>)}]>
+>>> order_desc = User.objects.all().order_by('-first_name')
+>>> print(order_desc.values())
+<QuerySet [{'id': 1, 'first_name': 'John', 'last_name': 'Smith', 'email_address'
+: 'john_s@thisemail.com', 'age': 21, 'created_at': datetime.datetime(2021, 7, 29
+, 12, 20, 45, 522281, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 29
+, 12, 20, 45, 522281, tzinfo=<UTC>)}, {'id': 3, 'first_name': 'Jeff', 'last_name
+': 'Pancakes', 'email_address': 'jeff_k@thisemail.com', 'age': 43, 'created_at':
+ datetime.datetime(2021, 7, 29, 12, 21, 27, 841807, tzinfo=<UTC>), 'updated_at':
+ datetime.datetime(2021, 7, 29, 16, 37, 21, 156710, tzinfo=<UTC>)}]>

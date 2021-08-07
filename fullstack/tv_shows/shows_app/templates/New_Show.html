@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>New TV Show</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="go_back">
+            <p><a href="/shows/">Go Back</a></p>
+        </div>
+        <div class="header">
+            <h1>Add a New Show</h1>
+        </div>
+        <div class="main_content">
+            <form action="/shows/create/" method="POST">
+                {% csrf_token %}
+                <table class="show_form">
+                    <tr>
+                        <td colspan="2" class="form_cell">
+                            <p><label for="title">Title</label></p>
+                            <input type="text" name="title" id="title">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form_cell">
+                            <p><label for="network">Network</label></p>
+                            <input type="text" name="network" id="network">
+                        </td>
+                        <td class="form_cell">
+                            <p><label for="release_date">Release Date</label></p>
+                            <input type="date" name="release_date" id="release_date">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="form_cell">
+                            <p><label for="description">Description</label></p>
+                            <textarea name="description" id="description"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="form_cell">
+                            <button type="submit">Create</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

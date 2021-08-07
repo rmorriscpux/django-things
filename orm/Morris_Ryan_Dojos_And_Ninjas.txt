@@ -1,0 +1,146 @@
+(djangoPy3Env)
+Ryan@DESKTOP-AR97D27 MINGW64 ~/cd/Django/orm (master)
+$ django-admin startproject dojo_ninjas_proj
+(djangoPy3Env)
+Ryan@DESKTOP-AR97D27 MINGW64 ~/cd/Django/orm (master)
+$ cd dojo_ninjas_proj/
+(djangoPy3Env)
+Ryan@DESKTOP-AR97D27 MINGW64 ~/cd/Django/orm/dojo_ninjas_proj (master)
+$ python manage.py startapp dojo_ninjas_app
+(djangoPy3Env)
+Ryan@DESKTOP-AR97D27 MINGW64 ~/cd/Django/orm/dojo_ninjas_proj (master)
+$ python manage.py makemigrations
+Migrations for 'dojo_ninjas_app':
+  dojo_ninjas_app\migrations\0001_initial.py
+    - Create model Dojo
+    - Create model Ninja
+(djangoPy3Env)
+Ryan@DESKTOP-AR97D27 MINGW64 ~/cd/Django/orm/dojo_ninjas_proj (master)
+$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, dojo_ninjas_app, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying dojo_ninjas_app.0001_initial... OK
+  Applying sessions.0001_initial... OK
+(djangoPy3Env)
+Ryan@DESKTOP-AR97D27 MINGW64 ~/cd/Django/orm/dojo_ninjas_proj (master)
+$ python manage.py shell
+Python 3.9.5 (tags/v3.9.5:0a7dcbd, May  3 2021, 17:27:52) [MSC v.1928 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from dojo_ninjas_app.models import *
+>>> Dojo.objects.create(name='Yankees', city='New York City', state='NY')
+<Dojo: Dojo object (1)>
+>>> Dojo.objects.create(name='Rays', city='Tampa Bay', state='FL')
+<Dojo: Dojo object (2)>
+>>> Dojo.objects.create(name='White Sox', city='Chicago', state='IL')
+<Dojo: Dojo object (3)>
+>>> print(Dojo.objects.all().values())
+<QuerySet [{'id': 1, 'name': 'Yankees', 'city': 'New York City', 'state': 'NY', 'created_at': datetime.datetime(2021, 7, 29, 22, 22, 36, 327540, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 29, 22, 22, 36, 346730, tzinfo=<UTC>)}, {'id': 2, 'name': 'Rays', 'cit
+y': 'Tampa Bay', 'state': 'FL', 'created_at': datetime.datetime(2021, 7, 29, 22, 22, 54, 867809, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 29, 22, 22, 54, 867809, tzinfo=<UTC>)}, {'id': 3, 'name': 'White Sox', 'city': 'Chicago', 'state': 'IL', 'created_at':
+ datetime.datetime(2021, 7, 29, 22, 23, 11, 207856, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 29, 22, 23, 11, 207856, tzinfo=<UTC>)}]>
+>>> dojo_to_delete = Dojo.objects.get(id=1)
+>>> dojo_to_delete.delete()
+(1, {'dojo_ninjas_app.Ninja': 0, 'dojo_ninjas_app.Dojo': 1})
+>>> dojo_to_delete = Dojo.objects.get(id=2)
+>>> dojo_to_delete.delete()
+(1, {'dojo_ninjas_app.Ninja': 0, 'dojo_ninjas_app.Dojo': 1})
+>>> dojo_to_delete = Dojo.objects.get(id=3)
+>>> dojo_to_delete.delete()
+(1, {'dojo_ninjas_app.Ninja': 0, 'dojo_ninjas_app.Dojo': 1})
+>>> Dojo.objects.create(name='Mets', city='New York City', state='NY')
+<Dojo: Dojo object (4)>
+>>> Dojo.objects.create(name='Marlins', city='Miami', state='FL')
+<Dojo: Dojo object (5)>
+>>> Dojo.objects.create(name='Cubs', city='Chicago', state='IL')
+<Dojo: Dojo object (6)>
+>>> print(Dojo.objects.all().values())
+<QuerySet [{'id': 4, 'name': 'Mets', 'city': 'New York City', 'state': 'NY', 'created_at': datetime.datetime(2021, 7, 29, 22, 31, 37, 608457, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 29, 22, 31, 37, 608457, tzinfo=<UTC>)}, {'id': 5, 'name': 'Marlins', 'cit
+y': 'Miami', 'state': 'FL', 'created_at': datetime.datetime(2021, 7, 29, 22, 31, 50, 427314, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 29, 22, 31, 50, 427314, tzinfo=<UTC>)}, {'id': 6, 'name': 'Cubs', 'city': 'Chicago', 'state': 'IL', 'created_at': datetime
+.datetime(2021, 7, 29, 22, 32, 0, 281882, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 29, 22, 32, 0, 281882, tzinfo=<UTC>)}]>
+>>> Ninja.objects.create(dojo_id=Dojo.objects.get(id=4), first_name='Jacob', last_name='deGrom')
+<Ninja: Ninja object (1)>
+>>> Ninja.objects.create(dojo_id=Dojo.objects.get(id=4), first_name='Francisco', last_name='Lindor')
+<Ninja: Ninja object (2)>
+>>> Ninja.objects.create(dojo_id=Dojo.objects.get(id=4), first_name='Pete', last_name='Alonso')
+<Ninja: Ninja object (3)>
+>>> Ninja.objects.create(dojo_id=Dojo.objects.get(id=5), first_name='Jazz', last_name='Chisholm')
+<Ninja: Ninja object (4)>
+>>> Ninja.objects.create(dojo_id=Dojo.objects.get(id=5), first_name='Trevor', last_name='Rogers')
+<Ninja: Ninja object (5)>
+>>> Ninja.objects.create(dojo_id=Dojo.objects.get(id=5), first_name='Jesus', last_name='Aguilar')
+<Ninja: Ninja object (6)>
+>>> Ninja.objects.create(dojo_id=Dojo.objects.get(id=6), first_name='Kris', last_name='Bryant')
+<Ninja: Ninja object (7)>
+>>> Ninja.objects.create(dojo_id=Dojo.objects.get(id=6), first_name='Javier', last_name='Baez')
+<Ninja: Ninja object (8)>
+>>> Ninja.objects.create(dojo_id=Dojo.objects.get(id=6), first_name='Anthony', last_name='Rizzo')
+<Ninja: Ninja object (9)>
+>>> all_mets = Ninja.objects.filter(dojo_id=Dojo.objects.get(name='Mets'))
+>>> print(all_mets.values())
+<QuerySet [{'id': 1, 'dojo_id_id': 4, 'first_name': 'Jacob', 'last_name': 'deGrom', 'created_at': datetime.datetime(2021, 7, 29, 22, 38, 59, 524897, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 29, 22, 38, 59, 524897, tzinfo=<UTC>)}, {'id': 2, 'dojo_id_id': 4,
+ 'first_name': 'Francisco', 'last_name': 'Lindor', 'created_at': datetime.datetime(2021, 7, 29, 22, 39, 23, 528730, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 29, 22, 39, 23, 528730, tzinfo=<UTC>)}, {'id': 3, 'dojo_id_id': 4, 'first_name': 'Pete', 'last_name
+': 'Alonso', 'created_at': datetime.datetime(2021, 7, 29, 22, 39, 33, 27080, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 29, 22, 39, 33, 27080, tzinfo=<UTC>)}]>
+>>> all_cubs = Ninja.objects.filter(dojo_id=Dojo.objects.get(name='Cubs'))
+>>> print(all_cubs.values())
+<QuerySet [{'id': 7, 'dojo_id_id': 6, 'first_name': 'Kris', 'last_name': 'Bryant', 'created_at': datetime.datetime(2021, 7, 29, 22, 40, 17, 700800, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 29, 22, 40, 17, 700800, tzinfo=<UTC>)}, {'id': 8, 'dojo_id_id': 6,
+'first_name': 'Javier', 'last_name': 'Baez', 'created_at': datetime.datetime(2021, 7, 29, 22, 40, 26, 529019, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 29, 22, 40, 26, 529019, tzinfo=<UTC>)}, {'id': 9, 'dojo_id_id': 6, 'first_name': 'Anthony', 'last_name':
+'Rizzo', 'created_at': datetime.datetime(2021, 7, 29, 22, 40, 38, 999530, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 29, 22, 40, 38, 999530, tzinfo=<UTC>)}]>
+>>> last_ninjas_dojo = Ninja.objects.last().dojo_id
+>>> print(last_ninjas_dojo.__dict__)
+{'_state': <django.db.models.base.ModelState object at 0x0000017170AF9F40>, 'id': 6, 'name': 'Cubs', 'city': 'Chicago', 'state': 'IL', 'created_at': datetime.datetime(2021, 7, 29, 22, 32, 0, 281882, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 7, 29, 22, 32, 0, 2
+81882, tzinfo=<UTC>)}
+>>> exit()
+(djangoPy3Env)
+Ryan@DESKTOP-AR97D27 MINGW64 ~/cd/Django/orm/dojo_ninjas_proj (master)
+$ python manage.py makemigrations
+You are trying to add a non-nullable field 'desc' to dojo without a default; we
+can't do that (the database needs something to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null
+value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 1
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g.
+ timezone.now
+Type 'exit' to exit this prompt
+>>> 'old_dojo'
+Migrations for 'dojo_ninjas_app':
+  dojo_ninjas_app\migrations\0002_dojo_desc.py
+    - Add field desc to dojo
+(djangoPy3Env)
+Ryan@DESKTOP-AR97D27 MINGW64 ~/cd/Django/orm/dojo_ninjas_proj (master)
+$ python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, dojo_ninjas_app, sessions
+Running migrations:
+  Applying dojo_ninjas_app.0002_dojo_desc... OK
+(djangoPy3Env)
+Ryan@DESKTOP-AR97D27 MINGW64 ~/cd/Django/orm/dojo_ninjas_proj (master)
+$ python manage.py shell
+Python 3.9.5 (tags/v3.9.5:0a7dcbd, May  3 2021, 17:27:52) [MSC v.1928 64 bit (AM
+D64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from dojo_ninjas_app.models import *
+>>> Dojo.objects.create(name='Braves', city='Atlanta', state='GA', desc='The one
+ team everyone knows from TBS.')
+<Dojo: Dojo object (7)>
+>>>

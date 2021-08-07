@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>Results</title>
+</head>
+<body>
+    <div id="results" class="simple_block">
+        <h2>Submitted Info:</h2>
+        <div class="column" id="categories">
+            <div class="category" id="name"><p>Name:</p></div>
+            <div class="category" id="loc"><p>Dojo Location:</p></div>
+            <div class="category" id="lang"><p>Favorite Language:</p></div>
+            <div class="category" id="comments"><p>Comments:</p></div>
+            <div class="category" id="fave_food"><p>Favorite Food:</p></div>
+            <div class="category" id="clothing"><p>Today I Wore:</p></div>
+        </div>
+        <div class="column" id="categories">
+            <div class="content" id="my_name"><p>{{ request.session.name }}</p></div>
+            <div class="content" id="my_loc"><p>{{ request.session.location }}</p></div>
+            <div class="content" id="my_lang"><p>{{ request.session.language }}</p></div>
+            <div class="content" id="my_comments"><p>{{ request.session.comment }}</p></div>
+            <div class="content" id="my_fave_food"><p>{{ request.session.fave_food }}</p></div>
+            <div class="content" id="my_clothing">
+            <ul>
+                {% for c in request.session.clothing %}
+                <li>{{ c }}</li>
+                {% endfor %}
+            </ul></div>
+        </div>
+        <p><a href="/">Return</a></p>
+    </div>
+</body>
+</html>

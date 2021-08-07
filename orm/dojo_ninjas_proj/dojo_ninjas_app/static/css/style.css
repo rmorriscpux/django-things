@@ -1,0 +1,16 @@
+div.wrapper{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+div.form_tpl{
+    border: 1px solid black;
+    padding: 0px 30px 30px 30px;
+    text-align: center;
+}
+td.category{
+    text-align: right;
+}
+td.input{
+    text-align: left;
+}

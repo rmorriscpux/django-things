@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All The Users</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div id="main_table">
+        <h1>All The Users</h1>
+        <table id="user_table">
+            <thead>
+                <tr class="header">
+                    <th>id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in all_users %}
+                <tr class="{% cycle 'row1' 'row2' %}">
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.first_name }} {{ user.last_name }}</td>
+                    <td>{{ user.email_address }}</td>
+                    <td>{{ user.age }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <div id="new_user_form">
+        <h2>Add New User</h2>
+        <form action="/add_user" method="POST">
+            {% csrf_token %}
+            <table id="new_user_table">
+                <tr>
+                    <td><label for="first_name">First Name</label></td>
+                    <td><input type="text" name="first_name" id="first_name"></td>
+                    <td><label for="last_name">Last Name</label></td>
+                    <td><input type="text" name="last_name" id="last_name"></td>
+                </tr>
+                <tr>
+                    <td><label for="email_address">Email</label></td>
+                    <td><input type="text" name="email_address" id="email_address"></td>
+                    <td><label for="age">Age</label></td>
+                    <td><input type="text" name="age" id="age"></td>
+                </tr>
+            </table>
+            <button type="Submit">Add</button>
+        </form>
+        <p>{{ request.session.form_msg }}</p>
+    </div>
+</body>
+</html>

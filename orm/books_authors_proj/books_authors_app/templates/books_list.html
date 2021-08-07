@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books and Authors</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="wrapper_row" id="author_wrapper">
+        <div class="add_form" id="add_author_form">
+            <h2>Add a Book</h2>
+            <form action="/books/add" method="POST">
+                {% csrf_token %}
+                <table class="add_form_table" id="add_book_table">
+                    <tr>
+                        <td class="add_form_category"><label for="title">Title:</label></td>
+                        <td class="add_form_input"><input type="text" name="title" id="title"></td>
+                    </tr>
+                    <tr>
+                        <td class="add_form_category"><label for="description">Description</label></td>
+                        <td class="add_form_input"><textarea name="description" id="description"></textarea></td>
+                    </tr>
+                </table>
+                <button type="submit">Add</button>
+            </form>
+        </div>
+        <div class="list_display" id="books_list_display">
+            <table class="list" id="books_list">
+                <thead>
+                    <tr class="list_head">
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for b in all_books %}
+                    <tr class="{% cycle 'list_row_1' 'list_row_2' %}">
+                        <td>{{ b.id }}</td>
+                        <td>{{ b.title }}</td>
+                        <td><a href="/books/{{ b.id }}/">View</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+div.wrapper{
+    display: block;
+}
+div.main_content{
+    overflow-x: auto;
+}
+div.go_back{
+    display: flex;
+    justify-content: right;
+}
+table.dyn_list{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+td input, textarea{
+    width: 95%
+}
+tr.dyn_list_head{
+    background-color: #c8c8c8;
+}
+tr.dyn_list_row1{
+    background-color: #e0e0e0;
+}
+tr.dyn_list_row2{
+    background-color: #d4d4d4;
+}
+#show_list td, #show_list th{
+    border-right: 1px solid black;
+    padding: 5px;
+}
+td.form_cell p{
+    margin-bottom: 0px;
+}

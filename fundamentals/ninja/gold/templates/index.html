@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninja Gold</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div id="wrapper">
+        <div class="row" id="top">
+            <p>Your Gold: {{ request.session.gold }}</p>
+        </div>
+        <div class="row" id="all_actions">
+            <div class="ninja_action" id="farm">
+                <h2>Farm</h2>
+                <p>Earns 10-20 Gold</p>
+                <form action="/process-gold" id="goto_farm" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="location" id="location" value="Farm">
+                    <button type="submit" id="gold_button" name="gold_button">Find Gold!</button>
+                </form>
+            </div>
+            <div class="ninja_action" id="cave">
+                <h2>Cave</h2>
+                <p>Earns 5-10 Gold</p>
+                <form action="/process-gold" id="goto_cave" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="location" id="location" value="Cave">
+                    <button type="submit" id="gold_button" name="gold_button">Find Gold!</button>
+                </form>
+            </div>
+            <div class="ninja_action" id="house">
+                <h2>House</h2>
+                <p>Earns 2-5 Gold</p>
+                <form action="/process-gold" id="goto_house" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="location" id="location" value="House">
+                    <button type="submit" id="gold_button" name="gold_button">Find Gold!</button>
+                </form>
+            </div>
+            <div class="ninja_action" id="casino">
+                <h2>Casino</h2>
+                <p>Earns/Takes 0-50 Gold</p>
+                <form action="/process-gold" id="goto_casino" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="location" id="location" value="Casino">
+                    <button type="submit" id="gold_button" name="gold_button">Find Gold!</button>
+                </form>
+            </div>
+        </div>
+        <div id="activity">
+            <ul>
+                {% for entry in request.session.activity %}
+                <li>{{ entry }}</li>
+                {% endfor %} 
+            </ul>
+        </div>
+        <div class="row" id="bottom">
+            <form action="/reset" method="post">
+                {% csrf_token %}
+                <button type="submit" id="reset_button" name="reset_button">Reset</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

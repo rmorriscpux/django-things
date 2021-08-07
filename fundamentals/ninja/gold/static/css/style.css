@@ -1,0 +1,18 @@
+div.row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+div.ninja_action{
+    flex: 1;
+    margin: 10px;
+    border: 2px solid black;
+    padding: 20px;
+    text-align: center;
+}
+#activity{
+    margin: 10px;
+    border: 2px solid black;
+    height: 250px;
+    overflow: scroll;
+}

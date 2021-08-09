@@ -1,5 +1,6 @@
 div.wrapper{
     display: block;
+    max-width: 800px;
 }
 div.main_content{
     overflow-x: auto;
@@ -30,4 +31,7 @@ tr.dyn_list_row2{
 }
 td.form_cell p{
     margin-bottom: 0px;
+}
+h1{
+    margin-top: 0px;
 }

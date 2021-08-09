@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from .models import *
-import datetime
+from datetime import date
 
 # new_show_form: 
 # Path: /shows/new
@@ -15,22 +16,26 @@ def new_show_form(request):
 # Logic for adding a new TV show to the database.
 def add_new_show(request):
     if request.method == "POST":
-        if (
-            request.POST['title'] == "" or
-            request.POST['network'] == "" or
-            request.POST['release_date'] == ""
-        ):
-            request.session['form_msg'] = "Create Show: Fields Missing."
+        # Form information validation
+        errors = TVShow.objects.form_validator(request.POST)
+        if TVShow.objects.unique_title(request.POST['title']):
+            errors['title'] = f"TV Show Title '{request.POST['title']}' Already Exists!"
+        
+        if len(errors) > 0: # Return to the form with the errors.
+            for category, msg in errors.items():
+                messages.error(request, msg)
             return redirect('/shows/new/')
-        else:
+
+        else: # Create new show entry.
             new_show = TVShow.objects.create(
                 title = request.POST['title'],
                 network = request.POST['network'],
-                release_date = request.POST['release_date'],
+                release_date = request.POST['release_date'], # Quick note: ISO formatted (YYYY-MM-DD). Model can handle this and create DateField object.
                 description = request.POST['description'],
             )
-            request.session['form_msg'] = "New Show Created."
+            messages.success(request, "TV Show Entry Created!")
             return redirect('/shows/' + str(new_show.id) + '/')
+
     else:
         request.session['form_msg'] = ""
         return redirect('/shows/new/')
@@ -81,14 +86,17 @@ def edit_show_form(request, show_id):
 # Redirect to /shows/<int:show_id>/
 def update_show(request, show_id):
     if request.method == "POST":
-        if (
-            request.POST['title'] == "" or
-            request.POST['network'] == "" or
-            request.POST['release_date'] == ""
-        ):
-            request.session['form_msg'] = "Edit Show: Fields Missing."
-            return redirect('/shows/' + str(show_id) + '/')
-        else:
+        # Form information validation.
+        errors = TVShow.objects.form_validator(request.POST)
+        if TVShow.objects.unique_title(request.POST['title'], show_id):
+            errors['title'] = f"TV Show Title '{request.POST['title']}' Already Exists!"
+
+        if len(errors) > 0: # Return to the form with the errors.
+            for category, msg in errors.items():
+                messages.error(request, msg)
+            return redirect('/shows/' + str(show_id) + '/edit/')
+        
+        else: # Update the show.
             show_to_update = TVShow.objects.get(id=show_id)
             show_to_update.title = request.POST['title']
             show_to_update.network = request.POST['network']

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>Courses</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="row" id="add_course">
+            <h2>Add a New Course</h2>
+            <form id="add_course_form" method="POST" action="/add/">
+                {% csrf_token %}
+                <table id="add_course_table">
+                    <tr>
+                        <td class="category"><label for="course_name">Name</label></td>
+                        <td class="form_input"><input type="text" name="course_name" id="course_name"></td>
+                    </tr>
+                    <tr>
+                        <td class="category"><label for="course_description">Description</label></td>
+                        <td class="form_input"><textarea name="course_description" id="course_description"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td id="add_button_row" colspan="2"><button type="submit" name="add_button" id="add_button">Add</button></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        {% if messages %}
+        <div class="row" id="all_messages">
+            <ul>
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        <div class="row" id="course_list">
+            <table class="list" id="courses_table">
+                <tr class="list_header">
+                    <th>Course Name</th>
+                    <th>Description</th>
+                    <th>Date Added</th>
+                    <th>Actions</th>
+                </tr>
+                {% for course in all_courses %}
+                <tr class="{% cycle 'list_row1' 'list_row2' %}">
+                    <td><a href="/info/{{ course.id }}/">{{ course.name }}</a></td>
+                    <td>{{ course.description.content }}</td>
+                    <td>{{ course.created_at }}</td>
+                    <td><a href="/destroy/{{ course.id }}/">Remove</a></td>
+                </tr>
+                {% empty %}
+                <tr class="list_row1">
+                    <td colspan="4" id="empty_set">No courses added yet.</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</body>
+</html>

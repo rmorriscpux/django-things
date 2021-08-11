@@ -1,0 +1,60 @@
+body{
+    display: flex;
+    justify-content: center;
+}
+div.wrapper{
+    display: block;
+    width: 1000px;
+}
+div.row{
+    margin: 10px;
+}
+#add_course_table input{
+    width: 250px;
+}
+#add_course_table textarea{
+    width: 250px;
+    height: 100px;
+}
+#add_button_row{
+    text-align: center;
+}
+table.list{
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: fit-content;
+}
+tr.list_header{
+    background-color: #c0c0c0;
+}
+tr.list_row1{
+    background-color: #eeeeee;
+}
+tr.list_row2{
+    background-color: #d8d8d8;
+}
+td.category{
+    text-align: right;
+}
+table.list td, table.list th{
+    border-right: 1px solid black;
+    padding: 5px;
+}
+#empty_set{
+    text-align: center;
+    border-top: 1px solid black;
+}
+li.error{
+    color: #ff0000;
+}
+li.success{
+    color: #007f00;
+}
+#add_button{
+    background-color: #007f00;
+    color: #ffffff;
+}
+#yes_delete{
+    background-color: #7f0000;
+    color: #ffffff;
+}

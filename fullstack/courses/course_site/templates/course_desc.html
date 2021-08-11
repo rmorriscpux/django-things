@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>{{ selected_course.name }}</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="row" id="information">
+            <h2>{{ selected_course.name }}</h2>
+            <p>Created on: {{ selected_course.created_at }}</p>
+            <p>{{ selected_course.description.content }}</p>
+        </div>
+        <hr>
+        <div class="row" id="comment_form">
+            {% if messages %}
+            <ul id="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <form action="/info/{{ selected_course.id }}/comment/" method="POST">
+                {% csrf_token %}
+                <p><label for="comment">Add Comment</label></p>
+                <p><textarea name="comment" id="comment"></textarea></p>
+                <p><button type="submit" id="add_button">Add</button></p>
+            </form>
+        </div>
+        <!-- Note to self: figure out how to incorporate line breaks from a text field. -->
+        {% if selected_course.comments %}
+        <div class="row" id="all_comments">
+            {% for comment in selected_course.comments.all %}
+            <hr>
+            <p>{{ comment.content }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>Wall</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="row" id="div_top">
+            <h2>CodingDojo Wall</h2>
+            <p>Welcome, {{ user_first_name }}! | <a href="/logout/">Log Off</a></p>
+        </div>
+        <hr>
+        <div class="row" id="add_msg_form">
+            <form action="/wall/add/" method="POST" id="add_msg">
+                {% csrf_token %}
+                <table id="add_msg_table">
+                    <tr>
+                        <th id="add_msg_header"><label for="msg_content">Post a message</label></th>
+                    </tr>
+                    <tr>
+                        <td id="add_msg_input"><textarea name="msg_content" id="msg_content"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td id="add_msg_button"><button id="post_msg" type="submit">Post a message</button></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="row" id="posted_messages">
+            {% if all_messages %}
+            <ul id="all_messages">
+            {% for message in all_messages %}
+                <li>
+                    <p class="msg_header">{{ message.author.first_name }} {{ message.author.last_name }} - {{ message.created_at }}</p>
+                    <p class="msg_body">{{ message.content }}</p>
+                    {% if message.comments %}
+                    <ul class="msg_comments">
+                    {% for comment in message.comments.all %}
+                        <li>
+                            <p class="msg_header">{{ comment.author.first_name }} {{ comment.author.last_name }} - {{ comment.created_at }}</p>
+                            <p class="msg_body">{{ comment.content }}</p>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                    {% endif %}
+                    <form action="/wall/{{ message.id }}/comment/" method="POST" id="add_comment_{{ message.id }}">
+                        {% csrf_token %}
+                        <table id="add_comment_table">
+                            <tr>
+                                <th class="add_comment_header"><label for="comment_content">Post a comment</label></th>
+                            </tr>
+                            <tr>
+                                <td class="add_comment_input"><textarea name="comment_content" id="comment_content_{{ message.id }}"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td class="add_comment_button"><button id="post_comment_{{ message.id }}" type="submit">Post a comment</button></td>
+                            </tr>
+                        </table>
+                    </form>
+                </li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

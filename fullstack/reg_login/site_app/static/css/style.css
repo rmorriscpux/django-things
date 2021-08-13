@@ -1,0 +1,20 @@
+div.wrapper{
+    display: flex;
+    justify-content: center;
+}
+div.form_wrapper{
+    margin: 20px;
+}
+div.form_wrapper h2{
+    text-align: center;
+}
+td.form_button{
+    text-align: center;
+    padding: 10px;
+}
+div.messages li.error{
+    color: #af0000;
+}
+div.messages li.success{
+    color: #007f00
+}
